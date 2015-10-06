@@ -5,10 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="31ab49ebc92b42a7866c1821c9c60a28" Name="Diagram1">
-        <EntityTypeShape EntityType="MVCModel.Department" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MVCModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="MVCModel.FK_Department_Department" ManuallyRouted="false" />
-        <AssociationConnector Association="MVCModel.FK_User_Department" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MVCModel.Department" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="MVCModel.User" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="MVCModel.FK_User_Department" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

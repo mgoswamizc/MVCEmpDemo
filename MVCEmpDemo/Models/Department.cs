@@ -22,8 +22,6 @@ namespace MVCEmpDemo.Models
         public int DeptId { get; set; }
         public string DeptName { get; set; }
     
-        public virtual Department Department1 { get; set; }
-        public virtual Department Department2 { get; set; }
         public virtual ICollection<User> Users { get; set; }
     }
 }
