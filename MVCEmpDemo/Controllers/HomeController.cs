@@ -13,5 +13,11 @@ namespace MVCEmpDemo.Controllers
         {
             return View();
         }
+
+        //GET:LogIn
+        public ActionResult Login()
+        {
+            return View();
+        }
     }
 }

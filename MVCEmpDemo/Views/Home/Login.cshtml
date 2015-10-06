@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "LogIn";
+}
+@using (Html.BeginForm())
+{
+    <div class="jumbotron">
+        <h3>Login</h3>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-2">User Name</label>
+                    <div class="col-md-4">
+                        <input type="text" name="UserName" class="form-control" id="usr" placeholder="Enter Email Id">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Password</label>
+                    <div class="col-md-4">
+                        <input type="password" name="pswd" class="form-control" id="usr" placeholder="Enter Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Submit" class="btn btn-success">
+                    </div>
+                </div>
+                <div></div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-4">
+            <img src="#" class="img-circle" alt="Login Image" />
+        </div>
+    </div>
+    <a href="Index">Back to Index</a>
+
+
+}
+
