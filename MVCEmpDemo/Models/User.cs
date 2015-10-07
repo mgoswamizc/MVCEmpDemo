@@ -11,16 +11,31 @@ namespace MVCEmpDemo.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class User
     {
         public int ID { get; set; }
+
+        [Required(ErrorMessage="Please enter first name")]
         public string Fname { get; set; }
+
+        [Required]
         public string Lname { get; set; }
+
+        [Required]
         public string Username { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
         public string Mobile { get; set; }
+
+        [DataType(DataType.EmailAddress)]
         public string Emailid { get; set; }
+
+        [Required(ErrorMessage="Please select department")]
         public int DeptId { get; set; }
+
+        [DataType(DataType.Password)]
         public string Password { get; set; }
     
         public virtual Department Department { get; set; }
