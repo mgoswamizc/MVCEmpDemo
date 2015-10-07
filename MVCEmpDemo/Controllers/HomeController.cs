@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.ComponentModel.DataAnnotations;
 
 namespace MVCEmpDemo.Controllers
 {
@@ -80,7 +81,7 @@ namespace MVCEmpDemo.Controllers
             }
             catch (Exception)
             {
-                ViewBag.Message = "Something went wrong, Please contact yourself!";
+                ViewBag.Message = "Something went wrong, Please send your error details here - dsavlani@zerochaos.com";
                 ViewBag.Bool = false;
             }
             return View();

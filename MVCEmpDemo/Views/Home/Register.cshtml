@@ -61,6 +61,7 @@
                     @Html.Label("Contact", new { @class = "control-label col-md-4" })
                     <div class="col-md-4">
                         @Html.TextBoxFor(t => t.Mobile, new { @class = "form-control", placeholder = "Enter mobile number" })
+                        @Html.ValidationMessageFor(m => m.Mobile, null, new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -69,6 +70,7 @@
                     @Html.Label("Email", new { @class = "control-label col-md-4" })
                     <div class="col-md-4">
                         @Html.TextBoxFor(t => t.Emailid, new { @class = "form-control", placeholder = "Enter email address" })
+                        @Html.ValidationMessageFor(m => m.Emailid, null, new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -76,6 +78,7 @@
                     @Html.Label("Password", new { @class = "control-label col-md-4" })
                     <div class="col-md-4">
                         @Html.PasswordFor(t => t.Password, new { @class = "form-control", placeholder = "Enter password" })
+                        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
                     </div>
                 </div>
 

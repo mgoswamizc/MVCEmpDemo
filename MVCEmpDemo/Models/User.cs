@@ -17,27 +17,37 @@ namespace MVCEmpDemo.Models
     {
         public int ID { get; set; }
 
-        [Required(ErrorMessage="Please enter first name")]
+        [Required(ErrorMessage="First name is Required")]
         public string Fname { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Last name is Required")]
         public string Lname { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "User-Name is Required")]
         public string Username { get; set; }
 
-        [DataType(DataType.PhoneNumber)]
+       // [DataType(DataType.PhoneNumber, ErrorMessage="Enter Valid Contact")]
+     [RegularExpression(@"^(\d{10})$", ErrorMessage = "Invalid phone number")]
         public string Mobile { get; set; }
 
-        [DataType(DataType.EmailAddress)]
+        //[DataType(DataType.EmailAddress,ErrorMessage="E-mail is not valid")]
+        [RegularExpression(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
+        ErrorMessage = " Invalid E-mail Address")]
         public string Emailid { get; set; }
 
         [Required(ErrorMessage="Please select department")]
         public int DeptId { get; set; }
 
-        [Required(ErrorMessage = "Please enter password")]
+        
         [DataType(DataType.Password)]
+        [StringLength(255, MinimumLength = 8)]
+        [Required(ErrorMessage = "Password is Required")]
         public string Password { get; set; }
+
+        [Compare("Password")]
+        [DataType(DataType.Password, ErrorMessage="Password Doesn't match")]
+       
+      public string ConfirmPassword { get; set; }
     
         public virtual Department Department { get; set; }
     }
