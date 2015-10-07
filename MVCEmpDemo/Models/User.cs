@@ -35,6 +35,7 @@ namespace MVCEmpDemo.Models
         [Required(ErrorMessage="Please select department")]
         public int DeptId { get; set; }
 
+        [Required(ErrorMessage = "Please enter password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     

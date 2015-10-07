@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MVCEmpDemo.Controllers
 {
@@ -19,6 +20,29 @@ namespace MVCEmpDemo.Controllers
         //GET:LogIn
         public ActionResult Login()
         {
+            if (!User.Identity.IsAuthenticated)
+                return View();
+            else
+                return RedirectToAction("Index");
+        }
+        
+        [HttpPost]
+        public ActionResult Login(LoginModel log)
+        {
+            if (!ModelState.IsValid) return View(log);
+
+            var user = dbCtx.Users.Where(w => w.Username == log.UserName && w.Password == log.Password).FirstOrDefault();
+
+            if (user != null)
+            {
+                FormsAuthentication.SetAuthCookie(log.UserName, false);
+                Session["username"] = log.UserName;
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.ErrorMsg = "Invalid user name and pasword";
+            }
             return View();
         }
 
@@ -29,11 +53,35 @@ namespace MVCEmpDemo.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(User u)
+        public ActionResult Register(RegisterModel u)
         {
-            ViewBag.DeptList = dbCtx.Departments.ToList();
-            if (!ModelState.IsValid)
-                return View(u);
+            ViewBag.DeptList = dbCtx.Departments.ToList(); 
+            if (!ModelState.IsValid) return View(u);
+
+            try
+            {
+                var isUserExist = dbCtx.Users.Where(w => w.Username == u.Username).Count();
+                if (isUserExist == 0)
+                {
+                    dbCtx.Users.Add(u);
+                    dbCtx.SaveChanges();
+
+                    ViewBag.Message = "User \"" + u.Username + "\" created successfully! You will redirected in 3 seconds!";
+                    ViewBag.Bool = true;
+
+                    Response.AppendHeader("Refresh", "3;url=/");
+                }
+                else
+                {
+                    ViewBag.Message = "User \"" + u.Username + "\" already exist!";
+                    ViewBag.Bool = false;
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.Message = "Something went wrong, Please contact yourself!";
+                ViewBag.Bool = false;
+            }
             return View();
         }
     }

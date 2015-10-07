@@ -1,25 +1,29 @@
-﻿@{
+﻿@model MVCEmpDemo.Models.LoginModel
+@{
     ViewBag.Title = "LogIn";
 }
+<div class="jumbotron">
+    <h3>Login</h3>
+</div>
+<hr />
 @using (Html.BeginForm())
 {
-    <div class="jumbotron">
-        <h3>Login</h3>
-    </div>
-    <hr />
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-8">
+            <div class="text-danger">@ViewBag.ErrorMsg</div>
             <div class="form-horizontal">
                 <div class="form-group">
-                    <label class="control-label col-md-2">User Name</label>
+                    @Html.LabelFor(l => l.UserName, new { @class = "control-label col-md-4" })
                     <div class="col-md-4">
-                        <input type="text" name="UserName" class="form-control" id="usr" placeholder="Enter Email Id">
+                        @Html.TextBoxFor(e => e.UserName, new { @class = "form-control", placeholder = "Enter user name" })
+                        @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-2">Password</label>
+                    @Html.LabelFor(l => l.Password, new { @class = "control-label col-md-4" })
                     <div class="col-md-4">
-                        <input type="password" name="pswd" class="form-control" id="usr" placeholder="Enter Password">
+                        @Html.PasswordFor(e => e.Password, new { @class = "form-control", placeholder = "Enter password" })
+                        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -27,15 +31,9 @@
                         <input type="submit" value="Submit" class="btn btn-success">
                     </div>
                 </div>
-                <div></div>
             </div>
-        </div>
-        <div class="col-xs-6 col-md-4">
-            <img src="#" class="img-circle" alt="Login Image" />
         </div>
     </div>
     <a href="Index">Back to Index</a>
-
-
 }
 
