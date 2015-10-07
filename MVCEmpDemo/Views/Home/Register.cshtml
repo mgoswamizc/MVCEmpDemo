@@ -1,107 +1,102 @@
-﻿
+﻿@model MVCEmpDemo.Models.RegisterModel
 @{
-    ViewBag.Title = "Register";  
+    ViewBag.Title = "Register";
 }
-
-
-
 @using (Html.BeginForm())
-{       
-        <div class="jumbotron">
-            <h3>Register </h3>
-        </div>
-        <hr />
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-8">
-                <div class="form-horizontal">
-                  
-                        <div class="form-group">
-                            <label class="control-label col-md-4">First Name</label>
-                            <div class="col-md-4">
-                                <input type="text" name="FName" class="form-control" id="fname" placeholder="Enter First Name">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-4">Last Name</label>
+{
+    <div class="jumbotron">
+        <h3>Register</h3>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+            @if (ViewBag.Bool == true)
+            {
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                    <strong>@ViewBag.Message</strong>
+                </div>
+            }
+            else if (ViewBag.Bool == false)
+            {
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                    <strong>@ViewBag.Message</strong>
+                </div>
+            }
+            <div class="text-danger">@ViewBag.ErrorMsg</div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.Label("First Name", new { @class = "control-label col-md-4" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(t => t.Fname, new { @class = "form-control", placeholder = "Enter First Name" })
+                        @Html.ValidationMessageFor(m => m.Fname, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Last Name", new { @class = "control-label col-md-4" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(t => t.Lname, new { @class = "form-control", placeholder = "Enter Last Name" })
+                        @Html.ValidationMessageFor(m => m.Lname, null, new { @class = "text-danger" })
+                    </div>
+                </div>
 
-                            <div class="col-md-4">
-                                <input type="text" name="LName" class="form-control" id="lname" placeholder="Enter Last Name">
-                            </div>
+                <div class="form-group">
+                    @Html.Label("User Name", new { @class = "control-label col-md-4" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(t => t.Username, new { @class = "form-control", placeholder = "Enter user name" })
+                        @Html.ValidationMessageFor(m => m.Username, null, new { @class = "text-danger" })
+                    </div>
+                </div>
 
-                        </div>
+                <div class="form-group">
+                    @Html.Label("Department", new { @class = "control-label col-md-4" })
+                    <div class="col-md-4">
+                        @Html.DropDownList("DeptId", new SelectList(ViewBag.DeptList, "DeptId", "DeptName"), "Please select Department", new { @class = "form-control col-md-4" })
+                        @Html.ValidationMessageFor(m => m.DeptId, null, new { @class = "text-danger" })
+                    </div>
+                </div>
 
-                        <div class="form-group">
-                            <label class="control-label col-md-4">Department </label>
-
-                            <div class="col-md-4">
-                                @Html.DropDownList("Department", new SelectList(string.Empty, "0", "DEvelopment"), "Please select Department", new { style = "width:250px", @class = "dropdown1" })
-                            </div>
-
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-4">Contact </label>
-
-                            <div class="col-md-4">
-                                <input type="text" name="mobile" class="form-control" id="mob" placeholder="Enter Contact">
-                            </div>
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="control-label col-md-4">Email </label>
-
-                            <div class="col-md-4">
-                                <input type="text" name="LName" class="form-control" id="email" placeholder="Enter Email Id">
-                            </div>
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="control-label col-md-4">Password </label>
-
-                            <div class="col-md-4">
-                                <input type="password" name="password" class="form-control" id="passwd" placeholder="Enter Password" />
-                            </div>
-
-                        </div>
-
-
+                <div class="form-group">
+                    @Html.Label("Contact", new { @class = "control-label col-md-4" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(t => t.Mobile, new { @class = "form-control", placeholder = "Enter mobile number" })
+                        @Html.ValidationMessageFor(m => m.Mobile, null, new { @class = "text-danger" })
+                    </div>
+                </div>
 
 
-                        <div class="form-group">
-                            <label class="control-label col-md-4">Confirm Password </label>
+                <div class="form-group">
+                    @Html.Label("Email", new { @class = "control-label col-md-4" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(t => t.Emailid, new { @class = "form-control", placeholder = "Enter email address" })
+                        @Html.ValidationMessageFor(m => m.Emailid, null, new { @class = "text-danger" })
+                    </div>
+                </div>
 
-                            <div class="col-md-4">
-                                <input type="password" name="CPassword" class="form-control" id="cpasswd" placeholder="Confirm Password" inputmode="password">
-                            </div>
+                <div class="form-group">
+                    @Html.Label("Password", new { @class = "control-label col-md-4" })
+                    <div class="col-md-4">
+                        @Html.PasswordFor(t => t.Password, new { @class = "form-control", placeholder = "Enter password" })
+                        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
+                    </div>
+                </div>
 
-                        </div>
+                <div class="form-group">
+                    @Html.Label("Confirm Password", new { @class = "control-label col-md-4" })
+                    <div class="col-md-4">
+                        @Html.PasswordFor(t => t.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm password" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, null, new { @class = "text-danger" })
+                    </div>
+                </div>
 
-
-                        <div class="form-group">
-                            <label class="control-label col-md-4 has-error" id="errorLbl"></label>
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <div class="col-md-offset-4 col-md-4">
-                                <input type="submit" value="Submit" class="btn btn-success">
-                            </div>
-                        </div>
-
-</div>
-           
-
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-4">
+                        <input type="submit" value="Submit" class="btn btn-success">
+                    </div>
+                </div>
             </div>
-
         </div>
-        <a href="Index">Back to Index</a>
-
-        }
-
-
-
+    </div>
+}
+@Html.ActionLink("Back to Home", "Index")
