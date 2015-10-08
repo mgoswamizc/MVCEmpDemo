@@ -27,7 +27,7 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li style="color:white;"><a href="#"><span class="glyphicon glyphicon-user"></span> @Session["username"]</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    <li><a href="~/Home/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 }
                 else
                 {
