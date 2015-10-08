@@ -10,7 +10,7 @@ using System.Data.Entity;
 
 namespace MVCEmpDemo.Controllers
 {
-
+    [Authorize]
     public class DepartmentController : Controller
     {
         private MVCEntities dbCtx = new MVCEntities();
@@ -18,6 +18,7 @@ namespace MVCEmpDemo.Controllers
         // GET: Department
         public ActionResult Index()
         {
+            ViewBag.Result = TempData["Message"];
             return View(dbCtx.Departments.ToList());
         }
 
@@ -63,6 +64,11 @@ namespace MVCEmpDemo.Controllers
 
         public ActionResult Delete(int? id)
         {
+            if (dbCtx.Users.Where(w => w.DeptId == id).Any())
+            {
+                TempData["Message"] = "This department can not be delete because it is assigned to employee!";
+                return RedirectToAction("Index");
+            }
             Department department = dbCtx.Departments.Find(id);
             dbCtx.Departments.Remove(department);
             dbCtx.SaveChanges();            
