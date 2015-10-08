@@ -40,13 +40,13 @@ namespace MVCEmpDemo.Models
 
         
         [DataType(DataType.Password)]
-        [StringLength(255, MinimumLength = 8)]
+        [StringLength(255, MinimumLength = 8,ErrorMessage="Too short password")]
         [Required(ErrorMessage = "Password is Required")]
         public string Password { get; set; }
 
-      //  [Compare("Password")]
-      //  [DataType(DataType.Password, ErrorMessage="Password Doesn't match")] 
-      //public string ConfirmPassword { get; set; }
+        [Compare("Password")]
+        [DataType(DataType.Password, ErrorMessage="Password Doesn't match")]
+        public string ConfirmPassword { get; set; }
     
         public virtual Department Department { get; set; }
     }
