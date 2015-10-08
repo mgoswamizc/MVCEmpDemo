@@ -11,6 +11,7 @@ namespace MVCEmpDemo.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Department
     {
@@ -20,6 +21,9 @@ namespace MVCEmpDemo.Models
         }
     
         public int DeptId { get; set; }
+
+        [Display(Name="Department Name")]
+        [Required(ErrorMessage="Department Name Must Required")]
         public string DeptName { get; set; }
     
         public virtual ICollection<User> Users { get; set; }
