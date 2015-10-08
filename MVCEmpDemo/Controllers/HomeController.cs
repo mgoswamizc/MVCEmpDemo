@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Validation;
 
 namespace MVCEmpDemo.Controllers
 {
@@ -26,7 +27,7 @@ namespace MVCEmpDemo.Controllers
             else
                 return RedirectToAction("Index");
         }
-
+        
         [HttpPost]
         public ActionResult Login(LoginModel log)
         {
@@ -47,6 +48,13 @@ namespace MVCEmpDemo.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Clear();
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Register()
         {
             ViewBag.DeptList = dbCtx.Departments.ToList();
@@ -56,7 +64,7 @@ namespace MVCEmpDemo.Controllers
         [HttpPost]
         public ActionResult Register(User u)
         {
-            ViewBag.DeptList = dbCtx.Departments.ToList();
+            ViewBag.DeptList = dbCtx.Departments.ToList(); 
             if (!ModelState.IsValid) return View(u);
 
             try
@@ -78,11 +86,27 @@ namespace MVCEmpDemo.Controllers
                     ViewBag.Bool = false;
                 }
             }
-            catch (Exception)
+            catch (DbEntityValidationException e)
             {
-                ViewBag.Message = "Something went wrong, Please send your error details here - dsavlani@zerochaos.com";
-                ViewBag.Bool = false;
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                                ve.PropertyName,
+                                eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                                ve.ErrorMessage);
+                    }
+                }
+                throw;
             }
+                //catch (Exception)
+            //{
+            //    ViewBag.Message = "Something went wrong, Please send your error details here - dsavlani@zerochaos.com";
+            //    ViewBag.Bool = false;
+            //}
             return View();
         }
     }

@@ -40,7 +40,7 @@ namespace MVCEmpDemo.Models
 
 
         [DataType(DataType.Password)]
-        [StringLength(255, MinimumLength = 8)]
+        //[StringLength(255, MinimumLength = 8)]
         [Required(ErrorMessage = "Password is Required")]
         public string Password { get; set; }
 
