@@ -17,8 +17,7 @@ namespace MVCEmpDemo.App_Start
             bundles.Add(new ScriptBundle("~/Content/js").Include("~/Content/jquery.js",
                                                                  "~/Content/bootstrap/js/bootstrap.min.js"));
             //adding css
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap/css/bootstrap.min.css",
-                                                                 "~/Content/bootstrap/css/bootstrap-theme.min.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap/css/bootstrap.min.css"));
         }
         
     }
