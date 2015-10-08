@@ -29,7 +29,7 @@ namespace MVCEmpDemo.Controllers
         }
         
         [HttpPost]
-        public ActionResult Login(LoginModel log)
+        public ActionResult Login(LoginModel log, string returnUrl)
         {
             if (!ModelState.IsValid) return View(log);
 
@@ -39,7 +39,11 @@ namespace MVCEmpDemo.Controllers
             {
                 FormsAuthentication.SetAuthCookie(log.UserName, false);
                 Session["username"] = log.UserName;
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                if (Url.IsLocalUrl(returnUrl))
+                    return Redirect(returnUrl);
+                else
+                    return RedirectToAction("Index", "Home");
             }
             else
             {
