@@ -26,7 +26,7 @@ namespace MVCEmpDemo.Controllers
             else
                 return RedirectToAction("Index");
         }
-        
+
         [HttpPost]
         public ActionResult Login(LoginModel log)
         {
@@ -54,9 +54,9 @@ namespace MVCEmpDemo.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterModel u)
+        public ActionResult Register(User u)
         {
-            ViewBag.DeptList = dbCtx.Departments.ToList(); 
+            ViewBag.DeptList = dbCtx.Departments.ToList();
             if (!ModelState.IsValid) return View(u);
 
             try
@@ -64,8 +64,7 @@ namespace MVCEmpDemo.Controllers
                 var isUserExist = dbCtx.Users.Where(w => w.Username == u.Username).Count();
                 if (isUserExist == 0)
                 {
-                    User user = new User { Fname = u.Fname, Lname = u.Lname, Username = u.Username, Mobile = u.Mobile, Emailid = u.Emailid, DeptId = u.DeptId, Password = u.Password };
-                    dbCtx.Users.Add(user);
+                    dbCtx.Users.Add(u);
                     dbCtx.SaveChanges();
 
                     ViewBag.Message = "User \"" + u.Username + "\" created successfully! You will redirected in 3 seconds!";
