@@ -1,0 +1,55 @@
+﻿@model MVCEmpDemo.Models.User
+@{
+    ViewBag.Title = Session["username"];
+}
+<div class="jumbotron">
+    <h3>Your Profile</h3>
+</div>   
+@using (Html.BeginForm())
+{   
+<h4>Personal Information</h4>
+<hr />
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-8">
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.Label("Name", new { @class = "control-label col-md-4" })
+                <div class="col-md-3">
+                    @Html.DisplayFor(model => model.Fname, new { @class = "form-control" })
+                    @Html.DisplayFor(model => model.Lname, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("UserName", new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.DisplayFor(model => model.Username, new { @class = "control-label col-md-4" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Mobile No", new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.DisplayFor(model => model.Mobile, new { @class = "control-label col-md-4" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Email ID", new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.DisplayFor(model => model.Emailid, new { @class = "control-label col-md-4" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Department Name", new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.DisplayFor(model => model.Department.DeptName, new { @class = "control-label col-md-4" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Password", new { @class = "control-label col-md-4" })
+                <div class="col-md-4">
+                    @Html.DisplayFor(model => model.Password, new { @class = "control-label col-md-4" })
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+}

@@ -1,14 +1,31 @@
 ﻿@{
     ViewBag.Title = "Index Page";
 }
-<div class="jumbotron">
-    <div class="row">
-        <div class="col-xs-12 col-sm-3 col-md-8"><h3>Employee Portfolio</h3></div>
+
+@if (!User.Identity.IsAuthenticated)
+{
+    //User is Not LogIn
+        <div class="jumbotron">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3 col-md-8"><h3>Employee Portfolio</h3></div>
+        </div>
     </div>
-</div>
-<hr />
-<div class="container-fluid">
-    <center>
-        <h3>This is one of the widely used Employee management system! Thanks for visiting. Apno din subh rahe.</h3>
-    </center>
-</div>
+    <hr />
+    <div class="container-fluid">
+        <center>
+            <h3>This is one of the widely used Employee management system! Thanks for visiting. Apno din subh rahe.</h3>
+        </center>
+    </div>
+}
+//When User Is LogIn
+else
+{
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3 col-md-8"><h3>Well Come @Session["username"] !</h3></div>
+        </div>
+    </div>
+    <hr />
+    <strong>Chill bro.....</strong> 
+}
+

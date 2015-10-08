@@ -109,5 +109,14 @@ namespace MVCEmpDemo.Controllers
             //}
             return View();
         }
+
+        [Authorize]
+        public ActionResult Detail()
+        {
+                var uname = Session["Username"].ToString();
+                var user = dbCtx.Users.Where(m => m.Username == uname).FirstOrDefault();
+                //User user = dbCtx.Users.Find(name);
+                return View(user);
+        }
     }
 }
