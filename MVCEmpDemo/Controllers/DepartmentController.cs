@@ -45,9 +45,28 @@ namespace MVCEmpDemo.Controllers
             }
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(int? id)
         {
-            return View();
+            Department department = dbCtx.Departments.Find(id);
+            return View(department);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Department dept)
+        {
+            if (!ModelState.IsValid) return View(dept);
+
+            dbCtx.Entry(dept).State = EntityState.Modified;
+            dbCtx.SaveChanges();
+            return RedirectToAction("Index");            
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            Department department = dbCtx.Departments.Find(id);
+            dbCtx.Departments.Remove(department);
+            dbCtx.SaveChanges();            
+            return RedirectToAction("Index");
         }
     }
 }
