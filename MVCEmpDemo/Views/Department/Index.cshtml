@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MVCEmpDemo.Models.Department>
+@{
+    ViewBag.Title = "Department";
+}
+<div class="jumbotron">
+    <h3>All Department</h3>
+</div>
+<hr />
+<strong> @Html.ActionLink("Creat New", "Create")</strong>
+<div class="row">
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>@Html.DisplayNameFor(model => model.DeptName)</th>
+            <th><b>Action</b></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.DeptId)</td>
+                <td>@Html.DisplayFor(modelItem => item.DeptName)</td>
+                <td>
+                    <a href="Edit/@item.DeptId"><span data-toggle="tooltip" data-placement="left" title="Edit Detail" class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> &nbsp;&nbsp;
+                    <a href="Delete/@item.DeptId"><span data-toggle="tooltip" data-placement="left" title="Delete" class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> 
+                </td>
+            </tr>
+        }
+    </table>
+</div>
